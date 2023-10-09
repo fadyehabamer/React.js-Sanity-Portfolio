@@ -3,7 +3,7 @@ import { SocialIcon } from 'react-social-icons'
 
 export default function NavBar() {
   return (
-    <nav className="flex bg-violet-600/95 items-center justify-between bg-white px-5 py-6 w-full ">
+    <nav className="flex bg-violet-600/95 items-center justify-between  px-5 py-6 w-full ">
       <div>
         <NavLink to="/" className="flex items-center justify-center">
           <svg

@@ -1,7 +1,7 @@
 import SanityClient from '../client.js';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import post from '../../../portfolio/schemas/post.js';
+// import post from '../../../portfolio/schemas/post.js';
 export default function Project() {
   const [projecttData, setProjectData] = useState(null);
   useEffect(() => {
