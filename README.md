@@ -1,1 +1,1 @@
-# React.js-Sanity-Portfolio
+<img src="/readme-img.png">
