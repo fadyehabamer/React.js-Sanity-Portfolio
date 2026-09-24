@@ -1,7 +1,6 @@
 import SanityClient from '../client.js';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import post from '../../../portfolio/schemas/post.js';
 export default function Project() {
   const [projecttData, setProjectData] = useState(null);
   useEffect(() => {
@@ -26,10 +25,7 @@ export default function Project() {
         }
         `
     )
-      .then((data) => {
-        console.log(data);
-        setProjectData(data);
-      })
+      .then((data) => setProjectData(data))
       .catch(console.error);
   }, []);
 
@@ -38,7 +34,7 @@ export default function Project() {
       <section className="container mx-auto">
         <h1 className="text-5xl flex justify-center cursive">Projects Page</h1>
         <h2 className="text-lg text-gray-600 flex justify-center mb-12">
-          Welcome to my page of blog posts
+          Welcome to my page of projects
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projecttData &&
@@ -68,7 +64,7 @@ export default function Project() {
                 </Link>
 
                 <p className="my-6 text-lg text-gray-700 leading-relaxed">
-                  {project.tags.map((tag) => (
+                  {(project.tags ?? []).map((tag) => (
                     <span
                       key={tag}
                       className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
