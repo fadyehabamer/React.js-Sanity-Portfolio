@@ -22,7 +22,7 @@ export default function About(){
         <main className="relative">
         <img
             src={imgBg}
-            alt="Background"
+            alt=""
             className="absolute w-full"
         />
         <div className="p-10 lg:pt-48 container mx-auto relative">
@@ -41,8 +41,8 @@ export default function About(){
                 <div className="prose lg:prose-xl text-violet">
                     <BlockContent
                         blocks={author.bio}
-                        projectId="v0q0xj1i"
-                        dataset="production"
+                        projectId={SanityClient.config().projectId}
+                        dataset={SanityClient.config().dataset}
                     />
                 </div>
             </div>

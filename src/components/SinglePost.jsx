@@ -5,11 +5,14 @@ import BlockContent from '@sanity/block-content-to-react';
 
 export default function SinglePost() {
   const [singlePost, setSinglePost] = useState(null);
+  const [notFound, setNotFound] = useState(false);
   const { slug } = useParams();
 
   useEffect(() => {
+    // Pass the slug as a GROQ parameter: interpolating the URL segment into the
+    // query string lets a crafted URL rewrite the query.
     SanityClient.fetch(
-      `*[slug.current == "${slug}"]{
+      `*[_type == "post" && slug.current == $slug]{
         title,
         _id,
         slug,
@@ -21,16 +24,18 @@ export default function SinglePost() {
         },
         body,
         "name": author->name,
-        "authorImage": author->image
-      }`
+        "authorImage": author->image.asset->url
+      }`,
+      { slug }
     )
       .then((data) => {
-        console.log(data);
-        setSinglePost(data[0]);
+        setSinglePost(data[0] ?? null);
+        setNotFound(!data[0]);
       })
       .catch(console.error);
   }, [slug]);
 
+  if (notFound) return <div>Post not found.</div>;
   if (!singlePost) return <div>Loading...</div>;
 
   return (
@@ -43,23 +48,27 @@ export default function SinglePost() {
                 {singlePost.title}
               </h1>
               <div className="flex justify-center text-gray-800">
-                <img
-                  src={singlePost.mainImage.asset.url}
-                  alt={singlePost.name}
-                  className="w-10 h-10 rounded-full"
-                />
+                {singlePost.authorImage && (
+                  <img
+                    src={singlePost.authorImage}
+                    alt={singlePost.name}
+                    className="w-10 h-10 rounded-full"
+                  />
+                )}
                 <p className="cursive flex items-center pl-2 text-2xl">
                   {singlePost.name}
                 </p>
               </div>
             </div>
           </div>
-          <img
-            src={singlePost.mainImage.asset.url}
-            alt={singlePost.title}
-            className="w-full object-cover rounded-t"
-            style={{ height: '400px' }}
-          />
+          {singlePost.mainImage?.asset?.url && (
+            <img
+              src={singlePost.mainImage.asset.url}
+              alt={singlePost.title}
+              className="w-full object-cover rounded-t"
+              style={{ height: '400px' }}
+            />
+          )}
         </header>
         <div className="px-16 lg:px-48 py-12 lg:py-20 prose lg:prose-xl max-w-full">
           <BlockContent blocks={singlePost.body} />

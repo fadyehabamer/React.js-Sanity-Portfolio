@@ -5,8 +5,9 @@ export default function NavBar() {
   return (
     <nav className="flex bg-violet-600/95 items-center justify-between  px-5 py-6 w-full ">
       <div>
-        <NavLink to="/" className="flex items-center justify-center">
+        <NavLink to="/" aria-label="Home" className="flex items-center justify-center">
           <svg
+            aria-hidden="true"
             width="41"
             height="39"
             viewBox="0 0 41 39"
@@ -38,7 +39,6 @@ export default function NavBar() {
       </div>
       <ul
         id="drawer"
-        role="menu"
         className="sm:gap-3  sm:flex-row sm:w-auto sm:min-h-0  flex flex-row"
       >
        
