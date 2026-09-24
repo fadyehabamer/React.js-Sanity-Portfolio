@@ -41,8 +41,8 @@ export default function About(){
                 <div className="prose lg:prose-xl text-violet">
                     <BlockContent
                         blocks={author.bio}
-                        projectId="v0q0xj1i"
-                        dataset="production"
+                        projectId={SanityClient.config().projectId}
+                        dataset={SanityClient.config().dataset}
                     />
                 </div>
             </div>
