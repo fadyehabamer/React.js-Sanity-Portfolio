@@ -8,8 +8,10 @@ export default function SinglePost() {
   const { slug } = useParams();
 
   useEffect(() => {
+    // Pass the slug as a GROQ parameter: interpolating the URL segment into the
+    // query string lets a crafted URL rewrite the query.
     SanityClient.fetch(
-      `*[slug.current == "${slug}"]{
+      `*[_type == "post" && slug.current == $slug]{
         title,
         _id,
         slug,
@@ -22,7 +24,8 @@ export default function SinglePost() {
         body,
         "name": author->name,
         "authorImage": author->image
-      }`
+      }`,
+      { slug }
     )
       .then((data) => {
         console.log(data);
