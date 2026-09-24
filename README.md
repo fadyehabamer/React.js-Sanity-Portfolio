@@ -28,7 +28,7 @@ npm run lint      # ESLint
 
 ## Sanity configuration
 
-The Sanity project and dataset are set in [`src/client.js`](src/client.js). The dataset must be public (the site uses no token). The site expects these document types:
+The Sanity project, dataset and [API version](https://www.sanity.io/docs/api-versioning) are set in [`src/client.js`](src/client.js). Rich text (`bio`, `body`) is rendered with [`@portabletext/react`](https://github.com/portabletext/react-portabletext), and post images are requested at the displayed size through [`@sanity/image-url`](https://www.sanity.io/docs/image-url). The dataset must be public (the site uses no token). The site expects these document types:
 
 - `author`: `name`, `bio` (block content), `image`
 - `project`: `title`, `date`, `place`, `description`, `projectType`, `link`, `tags`, `mainImage`

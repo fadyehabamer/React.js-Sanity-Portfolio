@@ -1,6 +1,6 @@
 import  {useEffect , useState} from "react";
 import SanityClient from "../client.js";
-import BlockContent from "@sanity/block-content-to-react";
+import { PortableText } from "@portabletext/react";
 import imgBg from "../assets/pattern.svg";
 export default function About(){
     const [author, setAuthor] = useState(null);    
@@ -39,11 +39,7 @@ export default function About(){
                     <span className="text-violet-900">{author.name}</span>
                 </h1>
                 <div className="prose lg:prose-xl text-violet">
-                    <BlockContent
-                        blocks={author.bio}
-                        projectId={SanityClient.config().projectId}
-                        dataset={SanityClient.config().dataset}
-                    />
+                    <PortableText value={author.bio ?? []} />
                 </div>
             </div>
             </section>
