@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import SanityClient from '../client.js';
-import BlockContent from '@sanity/block-content-to-react';
+import { PortableText } from '@portabletext/react';
 
 export default function SinglePost() {
   const [singlePost, setSinglePost] = useState(null);
@@ -71,7 +71,7 @@ export default function SinglePost() {
           )}
         </header>
         <div className="px-16 lg:px-48 py-12 lg:py-20 prose lg:prose-xl max-w-full">
-          <BlockContent blocks={singlePost.body} />
+          <PortableText value={singlePost.body ?? []} />
         </div>
       </article>
     </main>
