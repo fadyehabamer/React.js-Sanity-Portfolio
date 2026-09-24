@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import SanityClient from '../client.js';
 import { PortableText } from '@portabletext/react';
+import { imageUrl, imageSrcSet } from '../imageUrl.js';
 
 export default function SinglePost() {
   const [singlePost, setSinglePost] = useState(null);
@@ -63,7 +64,9 @@ export default function SinglePost() {
           </div>
           {singlePost.mainImage?.asset?.url && (
             <img
-              src={singlePost.mainImage.asset.url}
+              src={imageUrl(singlePost.mainImage, 1600)}
+              srcSet={imageSrcSet(singlePost.mainImage, [800, 1200, 1600, 2400])}
+              sizes="100vw"
               alt={singlePost.title}
               className="w-full object-cover rounded-t"
               style={{ height: '400px' }}

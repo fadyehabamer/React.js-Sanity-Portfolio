@@ -1,6 +1,7 @@
 import  SanityClient  from '../client.js'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { imageUrl, imageSrcSet } from '../imageUrl.js'
 export default function Post() {
     const [postData, setPostData] = useState(null)
     useEffect(() => {
@@ -30,7 +31,7 @@ export default function Post() {
                         <Link to={"/post/" + post.slug.current} key={post.slug.current}>
                             <span className="block h-64 relative rounded shadow leading-snug bg-white border-l-8 border-violet-400" key={index}>
                                 {post.mainImage?.asset?.url && (
-                                    <img src={post.mainImage.asset.url} alt={post.mainImage.alt ?? ""} className="w-full h-full rounded-r object-cover absolute"/>
+                                    <img src={imageUrl(post.mainImage, 800)} srcSet={imageSrcSet(post.mainImage, [400, 800, 1200])} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt={post.mainImage.alt ?? ""} className="w-full h-full rounded-r object-cover absolute"/>
                                 )}
                                 <span className="block relative h-full flex justify-end items-end pr-4 pb-4">
                                     <h3 className="text-gray-800 text-lg font-bold px-3 py-4 bg-violet-700 text-red-100 bg-opacity-75 rounded">{post.title}</h3>
