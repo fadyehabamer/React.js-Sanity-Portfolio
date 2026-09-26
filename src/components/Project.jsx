@@ -27,11 +27,13 @@ export default function Project() {
                     className="block h-64 relative rounded shadow leading-snug bg-white border-l-8 border-violet-400"
                     key={index}
                   >
-                    <img
-                      src={project.mainImage.asset.url}
-                      alt={project.mainImage.alt}
-                      className="w-full h-full rounded-r object-cover absolute"
-                    />
+                    {project.mainImage?.asset?.url && (
+                      <img
+                        src={project.mainImage.asset.url}
+                        alt={project.mainImage.alt ?? ""}
+                        className="w-full h-full rounded-r object-cover absolute"
+                      />
+                    )}
 
                     <span className="block relative h-full flex justify-end items-end pr-4 pb-4 gap-2">
                       <h3 className="text-gray-800 text-lg font-bold px-3 py-4 bg-violet-700 text-red-100 bg-opacity-75 rounded">
