@@ -1,4 +1,5 @@
 import  SanityClient  from '../client.js'
+import { postsQuery } from '../queries.js'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { imageUrl, imageSrcSet } from '../imageUrl.js'
@@ -6,17 +7,7 @@ export default function Post() {
     const [postData, setPostData] = useState(null)
     useEffect(() => {
         // * --> select all 
-        SanityClient.fetch(`*[_type == "post"]{
-            title,
-            slug,
-            mainImage{
-                asset->{
-                    _id,
-                    url
-                },
-                alt
-            }
-        }`).then((data) => setPostData(data))
+        SanityClient.fetch(postsQuery).then((data) => setPostData(data))
         .catch(console.error)
     }, [])
 

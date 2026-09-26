@@ -1,5 +1,7 @@
 # React.js + Sanity Portfolio
 
+[![CI](https://github.com/fadyehabamer/React.js-Sanity-Portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/fadyehabamer/React.js-Sanity-Portfolio/actions/workflows/ci.yml)
+
 A personal portfolio and blog built with React, Vite and Tailwind CSS. Content (author bio, projects and blog posts) is fetched at runtime from the [Sanity](https://www.sanity.io/) Content Lake.
 
 <img src="readme-img.png" alt="Screenshot of the portfolio home page">
@@ -24,6 +26,7 @@ npm run dev       # start the Vite dev server
 npm run build     # production build into dist/
 npm run preview   # serve the production build locally
 npm run lint      # ESLint
+npm test          # Vitest unit and component tests
 ```
 
 ## Sanity configuration

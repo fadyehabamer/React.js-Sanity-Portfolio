@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import SanityClient from '../client.js';
+import { postBySlugQuery } from '../queries.js';
 import { PortableText } from '@portabletext/react';
 import { imageUrl, imageSrcSet } from '../imageUrl.js';
 
@@ -10,25 +11,7 @@ export default function SinglePost() {
   const { slug } = useParams();
 
   useEffect(() => {
-    // Pass the slug as a GROQ parameter: interpolating the URL segment into the
-    // query string lets a crafted URL rewrite the query.
-    SanityClient.fetch(
-      `*[_type == "post" && slug.current == $slug]{
-        title,
-        _id,
-        slug,
-        mainImage{
-          asset->{
-            _id,
-            url
-          }
-        },
-        body,
-        "name": author->name,
-        "authorImage": author->image.asset->url
-      }`,
-      { slug }
-    )
+    SanityClient.fetch(postBySlugQuery, { slug })
       .then((data) => {
         setSinglePost(data[0] ?? null);
         setNotFound(!data[0]);
