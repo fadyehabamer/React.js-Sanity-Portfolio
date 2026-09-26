@@ -1,30 +1,12 @@
 import SanityClient from '../client.js';
+import { projectsQuery } from '../queries.js';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 export default function Project() {
   const [projecttData, setProjectData] = useState(null);
   useEffect(() => {
     // * --> select all
-    SanityClient.fetch(
-      `*[_type == "project"]
-        {
-            title,
-            date,
-            place,
-            description,
-            projectType,
-            link,
-            tags,
-            mainImage{
-                asset->{
-                    _id,
-                    url
-                },
-                alt
-            }
-        }
-        `
-    )
+    SanityClient.fetch(projectsQuery)
       .then((data) => setProjectData(data))
       .catch(console.error);
   }, []);

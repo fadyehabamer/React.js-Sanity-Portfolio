@@ -1,17 +1,12 @@
 import  {useEffect , useState} from "react";
 import SanityClient from "../client.js";
+import { authorQuery } from "../queries.js";
 import { PortableText } from "@portabletext/react";
 import imgBg from "../assets/pattern.svg";
 export default function About(){
     const [author, setAuthor] = useState(null);    
     useEffect(() => {
-        SanityClient.fetch(
-        `*[_type == "author"]{
-            name,
-            bio,
-            "authorImage": image.asset->url
-        }`
-        )
+        SanityClient.fetch(authorQuery)
         .then((data) => setAuthor(data[0]))
         .catch(console.error);
     }, []);
